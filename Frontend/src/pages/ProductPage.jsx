@@ -9,19 +9,130 @@ const ProductPage = () => {
 
 
     const [selectedRange, setSelectedRange] = useState("BharatPaper");
+    const [selectedBrand, setSelectedBrand] = useState(null);
+    const [selectedFactory, setSelectedFactory] = useState(null);
     const navigate = useNavigate();
 
     const handleSelectChange = (e) => {
         setSelectedRange(e.target.value);
     };
 
+    const handleBrandClick = (brand) => {
+        setSelectedBrand(brand);
+        setSelectedFactory(null); // Reset factory if brand changes
+    };
+
+    const handleFactoryClick = (factory) => {
+        setSelectedFactory(factory);
+    };
+
+    const handleProductClick = (product) => {
+        // Final step: Navigate to the spec page with the product info
+        navigate('/spec', { state: { buttonInfo: product } });
+    };
+
+    //Product ID Scheme: Range(1) + Brand(1) + Factory(1) + Product(2)
     const rangeButtons = {
         "BharatPaper": [
-            { id: 1, range:"BharatPaper",filename: "jk_tuffcote", label: "JK TUFFCOTE", color: "btn-primary" },
-            { id: 2, range:"BharatPaper",label: "JK ULTIMA", color: "btn-primary" },
-            { id: 3, range:"BharatPaper",label: "JK CLUB CARD", color: "btn-primary" },
-            { id: 4, range:"BharatPaper",label: "JK TUFF PACK", color: "btn-primary" },
-            { id: 5, range:"BharatPaper",label: "JK PUREFIL BASE", color: "btn-primary" }
+            {
+                id: "jkp",
+                label: "JK PAPER",
+                type: "brand",
+                factories: [
+                    {
+                        id: "jkp-1",
+                        label: "Unit: JKPM (Rayagada)",
+                        products: [
+                            { id: 11101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                            { id: 11102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        ]
+                    },
+                    {
+                        id: "jkp-2",
+                        label: "Unit: CPM (Gujarat)",
+                        products: [
+                            { id: 11201, label: "JK TuffCote", filename: "jk_tuffcote", range: "BharatPaper" },
+                            { id: 11202, label: "JK Ultima", filename: "jk_ultima", range: "BharatPaper" }
+                        ]
+                    },
+                    {
+                        id: "jkp-3",
+                        label: "Unit: Sirpur",
+                        products: [
+                            { id: 11301, label: "JK TuffCote", filename: "jk_tuffcote", range: "BharatPaper" },
+                            { id: 11302, label: "JK Ultima", filename: "jk_ultima", range: "BharatPaper" }
+                        ]
+                    }
+                ]
+            },
+            { id: "srf", label: "SRF", type: "brand", factories: [
+                    {
+                        id: "srf-1",
+                        label: "Unit: Madhya Pradesh",
+                        products: [
+                            { id: 12101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                            { id: 12102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        ]
+                    }
+                ]
+            },
+            { id: "srfaltech", label: "SRF ALTECH", type: "brand", factories: [
+                    {
+                        id: "srfaltech-1",
+                        label: "Unit: Madhya Pradesh",
+                        products: [
+                            { id: 13101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                            { id: 13102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "Tarille": [
+            { id: "jpfl", label: "JPFL", type: "brand", factories: [
+                    {
+                        id: "jpfl-1",
+                        label: "Unit: Nashik",
+                        products: [
+                            { id: 21101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                            { id: 21102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        ]
+                    }
+                ]
+            },
+            { id: "shyamsel", label: "SHYAM SEL", type: "brand", factories: [
+                    {
+                        id: "shyamsel-1",
+                        label: "Unit: Factory",
+                        products: [
+                            { id: 22101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                            { id: 22102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "Converters": [
+            { id: "jkp_conv", label: "JK PAPER", type: "brand", factories: [
+                    {
+                        id: "jkp_conv-1",
+                        label: "Unit: CPM (Gujarat)",
+                        products: [
+                            { id: 31101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                            { id: 31102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+
+    const vendorButtons = {
+        "BharatPaper": [
+            { id: 1, range:"BharatPaper",filename: "jkp", label: "JK PAPER", color: "btn-primary" },
+            { id: 1, range:"BharatPaper",filename: "srf", label: "SRF", color: "btn-primary" },
+            { id: 1, range:"BharatPaper",filename: "srf_altech", label: "SRF ALTECH", color: "btn-primary" },
+            { id: 1, range:"BharatPaper",filename: "ambani", label: "AMBANI", color: "btn-primary" },
         ],
         "Tarille": [
             { id: 1, label: "Product Specs", color: "btn-accent" },
