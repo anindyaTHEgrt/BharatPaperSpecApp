@@ -20,7 +20,7 @@ const SpecPage = () => {
     if (!info) return <div className="p-10 text-red-500">Error: No data context found.</div>;
 
     const fileName = `${info.range}_${info.filename}.csv`;
-    const filepath = `/Assets/Data/${fileName}`;
+    const filepath = `/Assets/Data/${info.filename}`;
 
     useEffect(() => {
         const controller = new AbortController();

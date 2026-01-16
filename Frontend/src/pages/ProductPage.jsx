@@ -132,8 +132,14 @@ const ProductPage = () => {
     };
 
     const handleProductClick = (product) => {
+        console.log(product);
+        // console.log(selectedBrand);
+        // console.log(selectedFactory);
+        const filename = selectedRange+'_'+selectedBrand.id+'_'+selectedFactory.id+'_'+product.filename+'.csv';
+        const prodDetails = {range: selectedRange, brand:selectedBrand.id, factory:selectedFactory.id, label:product.label, product: product.filename, filename: filename};
 
-        navigate('/spec', { state: { buttonInfo: product } });
+        console.log(filename);
+        navigate('/spec', { state: { buttonInfo: prodDetails } });
     };
 
     // Helper to determine styling for steps
@@ -253,7 +259,7 @@ const ProductPage = () => {
                                     {selectedFactory.products.map((product) => (
                                         <button
                                             key={product.id}
-                                            className="btn btn-outline btn-primary h-auto py-4 flex flex-col gap-1"
+                                            className="btn btn-outline btn-primary h-auto py-2 flex flex-col gap-0"
                                             onClick={() => handleProductClick(product)}
                                         >
                                             <span className="text-lg font-bold">{product.label}</span>
