@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router";
+import {useNavigate} from "react-router-dom";
 import Papa from 'papaparse';
 import Navbar from "@/components/Navbar.jsx";
 import FilterCard from "@/components/FilterCard.jsx";
 import DataTable from "@/components/DataTable.jsx";
 import FAB from '@/components/FAB.jsx';
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import {IconButton} from "@mui/material";
 
 const SpecPage = () => {
     const location = useLocation();
     const info = location.state?.buttonInfo;
+    const navigate = useNavigate();
 
     // We only need rawData (the master list) and filteredData (the view)
     const [rawData, setRawData] = useState([]);
@@ -77,6 +81,9 @@ const SpecPage = () => {
     return (
         <div className="min-h-screen bg-gray-100">
             <Navbar />
+            <IconButton onClick={() => navigate('/product')} aria-label="back-arrow" size="large">
+                <ArrowBackIosRoundedIcon />
+            </IconButton>
             <div className="p-8">
                 <h1 className="font-sans font-bold text-2xl text-blue-950 text-center w-full mb-6">
                     {info.label}

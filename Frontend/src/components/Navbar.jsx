@@ -1,12 +1,12 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import BharatPaperLogo from "../../public/Assets/Imgs/BharatPaper_logo.png"
 
 const Navbar = () => {
     const navigate = useNavigate();
 
     return (
         <div>
+
             <div className="navbar bg-base-100 shadow-sm place-content-center">
                 <div className="navbar-center ">
                     <a
@@ -14,7 +14,7 @@ const Navbar = () => {
                         onClick={() => navigate('/')}
                     >
                         <img
-                            src={BharatPaperLogo}
+                            src="Assets/Imgs/BharatPaper_logo.png"
                             alt="SpecList Logo"
                             className="h-8 w-auto object-contain" // Limits height and maintains aspect ratio
                         />
