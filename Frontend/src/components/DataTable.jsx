@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const DataTable = ({ data, columns }) => {
-    // State to track which row is currently clicked/highlighted
     const [selectedRowIndex, setSelectedRowIndex] = useState(null);
 
     if (!data || data.length === 0) {
@@ -20,8 +19,10 @@ const DataTable = ({ data, columns }) => {
                     {columns.map((col, index) => (
                         <th
                             key={index}
-                            className="capitalize text-xs font-bold p-4 text-left border-b border-gray-300"
-                            style={{ minWidth: '120px' }}
+                            className="capitalize text-xs font-bold p-3 text-left border-b border-gray-300
+                                       whitespace-normal break-words leading-tight align-top"
+                            // Control the column width here to force wrapping
+                            style={{ maxWidth: '100px', width: '100px' }}
                         >
                             {col.replace(/_/g, ' ')}
                         </th>
@@ -35,22 +36,18 @@ const DataTable = ({ data, columns }) => {
                     return (
                         <tr
                             key={`row-${rowIndex}`}
-                            // Click to select the row
                             onClick={() => setSelectedRowIndex(rowIndex)}
                             className={`
-                                    cursor-pointer transition-colors duration-150
-                                    ${isSelected ? 'bg-blue-200 hover:bg-blue-200' : 'hover:bg-blue-50 odd:bg-white even:bg-gray-50'}
-                                `}
+                                cursor-pointer transition-colors duration-150
+                                ${isSelected ? 'bg-blue-200' : 'hover:bg-blue-50 odd:bg-white even:bg-gray-50'}
+                            `}
                         >
                             {columns.map((col, colIndex) => (
                                 <td
                                     key={`${rowIndex}-${colIndex}`}
-                                    className="p-4 text-sm border-b border-gray-100 max-w-[250px]"
+                                    className="p-3 text-sm border-b border-gray-100"
                                 >
-                                    <div
-                                        className="truncate hover:whitespace-normal hover:overflow-visible hover:relative hover:z-20 hover:bg-inherit"
-                                        title={row[col]}
-                                    >
+                                    <div className="line-clamp-2" title={row[col]}>
                                         {row[col]}
                                     </div>
                                 </td>

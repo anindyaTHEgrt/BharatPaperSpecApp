@@ -14,17 +14,19 @@ const SpecPage = () => {
     const info = location.state?.buttonInfo;
     const navigate = useNavigate();
 
-    // We only need rawData (the master list) and filteredData (the view)
-    const [rawData, setRawData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-    const [columns, setColumns] = useState([]);
+    // State for Table 1
+    const [table1Data, setTable1Data] = useState([]);
+    const [filteredTable1, setFilteredTable1] = useState([]);
+    const [columns1, setColumns1] = useState([]);
+
+    // State for Table 2
+    const [table2Data, setTable2Data] = useState([]);
+    const [columns2, setColumns2] = useState([]);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    if (!info) return <div className="p-10 text-red-500">Error: No data context found.</div>;
-
-    const fileName = `${info.range}_${info.filename}.csv`;
-    const filepath = `/Assets/Data/${info.filename}`;
+    const filepath = info ? `/Assets/Data/${info.filename}` : '';
 
     useEffect(() => {
         const controller = new AbortController();
@@ -32,24 +34,34 @@ const SpecPage = () => {
 
         fetch(`${filepath}`, { signal: controller.signal })
             .then(response => {
-                if (!response.ok) throw new Error(`File not found: ${fileName}`);
+                if (!response.ok) throw new Error(`File not found: ${info.filename}`);
                 return response.text();
             })
             .then(csvText => {
-                Papa.parse(csvText, {
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: (results) => {
-                        // Initialize both states with the full dataset
-                        setRawData(results.data);
-                        setFilteredData(results.data);
+                // 1. Split text by double (or more) newlines to find separate tables
+                // This regex handles different OS line endings (\r\n or \n)
+                const tableSegments = csvText.split(/\r?\n\s*\r?\n/);
 
-                        if (results.data.length > 0) {
-                            setColumns(Object.keys(results.data[0]));
-                        }
-                        setLoading(false);
-                    },
-                });
+                // Process Table 1
+                if (tableSegments[0] && tableSegments[0].trim().length > 0) {
+                    const res1 = Papa.parse(tableSegments[0].trim(), { header: true, skipEmptyLines: true });
+                    if (res1.data && res1.data.length > 0) {
+                        setTable1Data(res1.data);
+                        setFilteredTable1(res1.data);
+                        setColumns1(Object.keys(res1.data[0]));
+                    }
+                }
+
+                // Process Table 2
+                if (tableSegments[1] && tableSegments[1].trim().length > 0) {
+                    const res2 = Papa.parse(tableSegments[1].trim(), { header: true, skipEmptyLines: true });
+                    if (res2.data && res2.data.length > 0) {
+                        setTable2Data(res2.data);
+                        setColumns2(Object.keys(res2.data[0]));
+                    }
+                }
+
+                setLoading(false);
             })
             .catch(err => {
                 if (err.name !== 'AbortError') {
@@ -59,47 +71,56 @@ const SpecPage = () => {
             });
 
         return () => controller.abort();
-    }, [filepath, fileName]);
+    }, [filepath, info.filename]);
 
+    // Update filter logic to target Table 1 (assuming filter is for primary data)
     const handleFilterApply = (filters) => {
         const { property, range } = filters;
         const [min, max] = range;
-
-        // Always filter from rawData so we have the full list available
-        const filtered = rawData.filter(row => {
+        const filtered = table1Data.filter(row => {
             const val = parseFloat(row[property]);
-
-            // If the cell is empty or not a number, decide if you want to hide it
-            if (isNaN(val)) return false;
-
-            return val >= min && val <= max;
+            return !isNaN(val) && val >= min && val <= max;
         });
-
-        setFilteredData(filtered);
+        setFilteredTable1(filtered);
     };
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <Navbar />
-            <IconButton onClick={() => navigate('/product')} aria-label="back-arrow" size="large">
-                <ArrowBackIosRoundedIcon />
+            <Navbar/>
+            <IconButton onClick={() => navigate('/product')} aria-label="back" size="large">
+                <ArrowBackIosRoundedIcon/>
             </IconButton>
+
             <div className="p-8">
-                <h1 className="font-sans font-bold text-2xl text-blue-950 text-center w-full mb-6">
+                <h1 className="font-sans font-bold text-2xl text-blue-950 text-center mb-6">
                     {info.label}
                 </h1>
 
-                {/* Only show FilterCard once columns are loaded */}
-                {!loading && <FilterCard columns={columns} onApply={handleFilterApply}/>}
-
-                {loading && <p className="py-4 text-blue-600 font-medium text-center">Loading dataset...</p>}
-                {error && <p className="py-4 text-red-500 font-medium text-center">{error}</p>}
-
-                {!loading && !error && (
-                    <DataTable data={filteredData} columns={columns} />
+                {/* Only show FilterCard if we actually have columns to filter by */}
+                {!loading && columns1.length > 0 && (
+                    <FilterCard columns={columns1} onApply={handleFilterApply}/>
                 )}
+
+                {/* Only show Table 1 if data exists */}
+                {!loading && !error && table1Data.length > 0 && (
+                    <div className="mb-10">
+                        <h3 className="text-lg font-semibold mb-2">Primary Specifications</h3>
+                        <DataTable data={filteredTable1} columns={columns1}/>
+                    </div>
+                )}
+
+                {/* Only show Table 2 if data exists */}
+                {!loading && !error && table2Data.length > 0 && (
+                    <div className="mt-10">
+                        <h3 className="text-lg font-semibold mb-2">Additional Details</h3>
+                        <DataTable data={table2Data} columns={columns2}/>
+                    </div>
+                )}
+
+                {loading && <p className="text-center">Loading dataset...</p>}
+                {error && <p className="text-red-500 text-center">{error}</p>}
             </div>
-            <FAB filepath={filepath} fileName={info.label} />
+            <FAB filepath={filepath} fileName={info.label}/>
         </div>
     );
 };

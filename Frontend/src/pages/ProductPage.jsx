@@ -55,6 +55,14 @@ const ProductPage = () => {
                             { id: 11221, label: "JK Tuffpac GC2", filename: "jk_tuffpac", range: "BharatPaper", type: "board", desc:"" },
                             { id: 11222, label: "JK CSB Purefil", filename: "jk_csbpurefil", range: "BharatPaper", type: "board", desc:"" },
                             { id: 11223, label: "JK FBS", filename: "jk_fbs", range: "BharatPaper", type: "board", desc:"" },
+                            { id: 11224, label: "JK LPB", filename: "jk_lpb", range: "BharatPaper", type: "board", desc:"" },
+                            { id: 11225, label: "JK Cigarette Board", filename: "jk_cigaretteboard", range: "BharatPaper", type: "board", desc:"" },
+                            { id: 11226, label: "JK Induction Wad", filename: "jk_inductionwad", range: "BharatPaper", type: "board", desc:"" },
+                            { id: 11227, label: "JK Ultima", filename: "jk_ultima", range: "BharatPaper", type: "board", desc:"" },
+                            { id: 11228, label: "JK Platina", filename: "jk_platina", range: "BharatPaper", type: "board", desc:"" },
+                            { id: 11229, label: "JK Club Card", filename: "jk_clubcard", range: "BharatPaper", type: "board", desc:"" },
+                            { id: 11230, label: "JK IV Board", filename: "jk_ivboard", range: "BharatPaper", type: "board", desc:"" },
+                            { id: 11231, label: "JK CBU (Uncoated)", filename: "jk_cbuuncoated", range: "BharatPaper", type: "board", desc:"" },
                         ]
                     },
                     {
@@ -142,19 +150,39 @@ const ProductPage = () => {
         ]
     };
 
+    // Helper to get data from sessionStorage safely
+    const getSavedValue = (key, defaultValue) => {
+        const saved = sessionStorage.getItem(key);
+        try {
+            return saved ? JSON.parse(saved) : defaultValue;
+        } catch {
+            return defaultValue;
+        }
+    };
+
     // State
-    const [selectedRange, setSelectedRange] = useState("BharatPaper");
-    const [selectedBrand, setSelectedBrand] = useState(null);
-    const [selectedFactory, setSelectedFactory] = useState(null);
+    const [selectedRange, setSelectedRange] = useState(() => getSavedValue("selectedRange", "BharatPaper"));
+    const [selectedBrand, setSelectedBrand] = useState(() => getSavedValue("selectedBrand", null));
+    const [selectedFactory, setSelectedFactory] = useState(() => getSavedValue("selectedFactory", null));
+    const [cpmFilter, setCpmFilter] = useState(() => getSavedValue("cpmFilter", "paper"));
+
 
     // --- RESET HANDLERS ---
+
+
+
+
 
     const handleRangeChange = (e) => {
         const newRange = e.target.value;
         setSelectedRange(newRange);
-        // Cascading Reset: Clear Brand and Factory when Range changes
         setSelectedBrand(null);
         setSelectedFactory(null);
+
+        // Save to storage
+        sessionStorage.setItem("selectedRange", JSON.stringify(newRange));
+        sessionStorage.removeItem("selectedBrand");
+        sessionStorage.removeItem("selectedFactory");
     };
 
     const handleBrandChange = (e) => {
@@ -162,14 +190,19 @@ const ProductPage = () => {
         const brandObj = rangeButtons[selectedRange].find(b => b.id === brandId);
 
         setSelectedBrand(brandObj);
-        // Cascading Reset: Clear Factory when Brand changes
         setSelectedFactory(null);
+
+        // Save to storage
+        sessionStorage.setItem("selectedBrand", JSON.stringify(brandObj));
+        sessionStorage.removeItem("selectedFactory");
     };
 
     const handleFactoryChange = (e) => {
         const factoryId = e.target.value;
         const factoryObj = selectedBrand.factories.find(f => f.id === factoryId);
+
         setSelectedFactory(factoryObj);
+        sessionStorage.setItem("selectedFactory", JSON.stringify(factoryObj));
     };
 
     const handleProductClick = (product) => {
@@ -183,7 +216,11 @@ const ProductPage = () => {
         navigate('/spec', { state: { buttonInfo: prodDetails } });
     };
 
-    const [cpmFilter, setCpmFilter] = useState("paper");
+    const handleCpmFilterChange = (filter) => {
+        setCpmFilter(filter);
+        sessionStorage.setItem("cpmFilter", JSON.stringify(filter));
+    };
+
 // 3. Create a filtered list based on the selection
     const isCPM = selectedFactory?.id === "jkp-2";
 
@@ -345,7 +382,7 @@ const ProductPage = () => {
                                                         aria-label="Paper"
                                                         checked={cpmFilter === "paper"}
                                                         data-checked={cpmFilter === "paper"}
-                                                        onChange={() => setCpmFilter("paper")}
+                                                        onChange={() => handleCpmFilterChange("paper")}
                                                         // Important: Stop the dropdown from closing when clicking the toggle
                                                         onClick={(e) => e.stopPropagation()}
                                                     />
@@ -356,7 +393,7 @@ const ProductPage = () => {
                                                         aria-label="Board"
                                                         checked={cpmFilter === "board"}
                                                         data-checked={cpmFilter === "board"}
-                                                        onChange={() => setCpmFilter("board")}
+                                                        onChange={() => handleCpmFilterChange("board")}
                                                         onClick={(e) => e.stopPropagation()}
                                                     />
                                                 </div>
