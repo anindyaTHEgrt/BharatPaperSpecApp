@@ -2,6 +2,7 @@ import React from 'react';
 import {useRef} from "react";
 import {useNavigate} from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
+import Alert from "../components/Alert.jsx";
 // import backgroundImage from "../../Assets/Imgs/BharatPaper_logo.png"
 const Homepage = () => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Homepage = () => {
     return (
         <div className="min-h-screen relative overflow-hidden">
             <Navbar/>
+            <Alert/>
             <div className="hero min-h-screen relative overflow-hidden">
                 {/* 1. Dedicated Background Layer */}
                 <div
@@ -37,6 +39,7 @@ const Homepage = () => {
 
                 {/* 4. Content Layer */}
                 <div className="hero-content text-neutral-content text-center relative z-30">
+
                     <div className="max-w-md">
                         <h1 className="mb-5 text-5xl font-bold ">Bharat Paper Mart</h1>
                         <p className="mb-5 text-xl">

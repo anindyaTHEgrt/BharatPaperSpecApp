@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar.jsx";
+import Alert from "@/components/Alert.jsx";
 
 import { MoveRight } from 'lucide-react';
 
@@ -115,8 +116,7 @@ const ProductPage = () => {
                     {
                         id: "jpfl-1", label: "Unit: Nashik",
                         products: [
-                            { id: 21101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
-                            { id: 21102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                            { id: 21101, label: "J-200", filename: "J-200", range: "Tarille", type: "", desc:"", thicknesses: [8,9,10,12,15,16,19,23,25,36,50] },
                         ]
                     }
                 ]
@@ -205,13 +205,31 @@ const ProductPage = () => {
         sessionStorage.setItem("selectedFactory", JSON.stringify(factoryObj));
     };
 
-    const handleProductClick = (product) => {
-        console.log(product);
-        // console.log(selectedBrand);
-        // console.log(selectedFactory);
-        const filename = selectedRange+'_'+selectedBrand.id+'_'+selectedFactory.id+'_'+product.filename+'.csv';
-        const prodDetails = {range: selectedRange, brand:selectedBrand.id, factory:selectedFactory.id, label:product.label, product: product.filename, filename: filename};
+    // const handleProductClick = (product) => {
+    //     console.log(product);
+    //     // console.log(selectedBrand);
+    //     // console.log(selectedFactory);
+    //     const filename = selectedRange+'_'+selectedBrand.id+'_'+selectedFactory.id+'_'+product.filename+'.csv';
+    //     const prodDetails = {range: selectedRange, brand:selectedBrand.id, factory:selectedFactory.id, label:product.label, product: product.filename, filename: filename};
+    //
+    //     console.log(filename);
+    //     navigate('/spec', { state: { buttonInfo: prodDetails } });
+    // };
 
+    const handleProductClick = (product, thickness = null) => {
+        // If the product has thicknesses but none is selected yet,
+        // we should wait or handle it via the UI below.
+        const filename = `${selectedRange}_${selectedBrand.id}_${selectedFactory.id}_${product.filename}${thickness ? '_' + thickness : ''}.csv`;
+
+        const prodDetails = {
+            range: selectedRange,
+            brand: selectedBrand.id,
+            factory: selectedFactory.id,
+            label: product.label,
+            product: product.filename,
+            thickness: thickness, // Pass the selected thickness
+            filename: filename
+        };
         console.log(filename);
         navigate('/spec', { state: { buttonInfo: prodDetails } });
     };
@@ -245,7 +263,7 @@ const ProductPage = () => {
     return (
         <div className="min-h-screen bg-gray-100 pb-20">
             <Navbar/>
-
+            <Alert/>
             <div className="container mx-auto px-4 py-8">
 
                 {/* --- DAISY UI STEPS --- */}
@@ -402,17 +420,48 @@ const ProductPage = () => {
 
                                         {/* 5. Map over the filtered list (visibleProducts) instead of the raw list */}
                                         {visibleProducts.map((product) => (
-                                            <li key={product.id}>
-                                                <button
-                                                    className="flex flex-col items-start gap-1 py-3 h-auto"
-                                                    onClick={() => {
-                                                        document.activeElement.blur();
-                                                        handleProductClick(product)
-                                                    }}
-                                                >
-                                                    <span className="font-bold">{product.label}</span>
-                                                    <span className="text-xs opacity-60 text-left">{product.desc}</span>
-                                                </button>
+                                            <li key={product.id} className="border-b border-base-100 last:border-none">
+                                                <div className="flex items-center justify-between w-full p-2">
+                                                    {/* Left side: Product Info */}
+                                                    <button
+                                                        className="flex flex-col items-start gap-1 flex-grow hover:bg-transparent"
+                                                        onClick={() => {
+                                                            // If no thickness options, navigate immediately
+                                                            if (!product.thicknesses) {
+                                                                document.activeElement.blur();
+                                                                handleProductClick(product);
+                                                            }
+                                                        }}
+                                                    >
+                                                        <span className="font-bold text-left">{product.label}</span>
+                                                        <span className="text-xs opacity-60 text-left">{product.desc}</span>
+                                                    </button>
+
+                                                    {/* Right side: Thickness Dropdown (Only if thicknesses exist) */}
+                                                    {product.thicknesses && (
+                                                        <div className="flex items-center gap-2">
+                                                            <select
+                                                                className="select select-bordered select-sm"
+                                                                defaultValue=""
+                                                                onChange={(e) => {
+                                                                    if (e.target.value) {
+                                                                        document.activeElement.blur();
+                                                                        handleProductClick(product, e.target.value);
+                                                                    }
+                                                                }}
+                                                                onClick={(e) => e.stopPropagation()} // Prevent closing the main menu
+                                                            >
+                                                                <option value="" disabled>Size/GSM</option>
+                                                                {product.thicknesses.map(t => (
+                                                                    <option key={t} value={t}>{t}</option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    )}
+
+                                                    {/* Simple arrow for products without thickness */}
+                                                    {!product.thicknesses && <MoveRight size={16} className="opacity-40" />}
+                                                </div>
                                             </li>
                                         ))}
 
