@@ -1,0 +1,21 @@
+Substance (GSM),Calliper (µ),Bulk (cm³/g),Bending resistance MD (mN),Bending resistance CD (mN),Bending resistance GM (mN)
+250,383,1.53,264,127,183
+270,416,1.54,325,158,227
+285,439,1.54,380,189,268
+300,465,1.55,436,217,308
+320,499,1.56,518,258,365
+350,550,1.57,650,333,465
+Tol.,± 5%,± 5%,,,± 15%
+
+PARAMETER,UNIT,TEST PROCEDURE,VALUES
+Plybond GSM ≥ 300, (J/m²),Tappi T 569,≥ 140
+Plybond GSM ≤ 295, (J/m²),Tappi T 569,≥ 130
+Roughness (PPS),microns (µ),Tappi T 555,1.5 (Max)
+IGT Dry pick (MV),m/s,ISO 3782 & 3783,1.2 (Min)
+ISO Brightness TS,(%),ISO 2470,85 (Min)
+C.I.E. Whiteness,(%),ISO 11475 / 11476,97 (Min)
+Gloss at 75° (%),(%),Tappi T 480,40 (Min)
+Cobb 60 - Top Side (T/S),g/m²,Tappi T 441,35 (Max)
+Cobb 60 - Bottom Side (B/S),g/m²,Tappi T 441,40 (Max)
+Moisture 200 - 300 gsm,(%),Tappi T 412,6.0 - 7.0
+Moisture 301 - 450 gsm,(%),Tappi T 412,7.0 - 8.5
