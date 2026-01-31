@@ -116,7 +116,12 @@ const ProductPage = () => {
                     {
                         id: "jpfl-1", label: "Unit: Nashik",
                         products: [
-                            { id: 21101, label: "J-200", filename: "J-200", range: "Tarille", type: "", desc:"", thicknesses: [8,9,10,12,15,16,19,23,25,36,50] },
+                            { id: 21101, label: "J-200", filename: "J-200", range: "Tarille", type: "", desc:"" },
+                            { id: 21102, label: "J-201", filename: "J-201", range: "Tarille", type: "", desc:"" },
+                            { id: 21103, label: "J-221", filename: "J-221", range: "Tarille", type: "", desc:"" },
+                            { id: 21104, label: "J-201M0", filename: "J-201M0", range: "Tarille", type: "", desc:"" },
+                            { id: 21105, label: "J-202M4", filename: "J-202M4", range: "Tarille", type: "", desc:"" },
+                            { id: 21106, label: "J-221M0", filename: "J-221M0", range: "Tarille", type: "", desc:"" },
                         ]
                     }
                 ]
@@ -219,7 +224,7 @@ const ProductPage = () => {
     const handleProductClick = (product, thickness = null) => {
         // If the product has thicknesses but none is selected yet,
         // we should wait or handle it via the UI below.
-        const filename = `${selectedRange}_${selectedBrand.id}_${selectedFactory.id}_${product.filename}${thickness ? '_' + thickness : ''}.csv`;
+        const filename = `${selectedRange}/${selectedBrand.id}/${selectedFactory.id}/${product.filename}${thickness ? '_' + thickness : ''}.csv`;
 
         const prodDetails = {
             range: selectedRange,

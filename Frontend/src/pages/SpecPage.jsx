@@ -26,36 +26,53 @@ const SpecPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const filepath = info ? `/Assets/Data/${info.filename}` : '';
-
     useEffect(() => {
+        // 1. Guard clause: Ensure info and filename exist
+        if (!info || !info.filename) {
+            setError("No product information provided.");
+            setLoading(false);
+            return;
+        }
+
         const controller = new AbortController();
         setLoading(true);
+        setError(null);
 
-        fetch(`${filepath}`, { signal: controller.signal })
+        // 2. Construct the path - info.filename already contains the full relative path
+        // e.g., "Tarille/jpfl/jpfl-1/J-200_8.csv"
+        const fullUrl = `/Assets/Data/${info.filename}`;
+
+        console.log(`Fetching from: ${fullUrl}`);
+        console.log(`Full info object:`, info);
+
+        // 3. Properly encode URI components - encode each segment separately
+        const encodedUrl = fullUrl.split('/').map(segment => encodeURIComponent(segment)).join('/');
+
+        fetch(encodedUrl, { signal: controller.signal })
             .then(response => {
-                if (!response.ok) throw new Error(`File not found: ${info.filename}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: Could not find file at ${info.filename}`);
+                }
                 return response.text();
             })
             .then(csvText => {
-                // 1. Split text by double (or more) newlines to find separate tables
-                // This regex handles different OS line endings (\r\n or \n)
+                // Split by double newlines to separate tables
                 const tableSegments = csvText.split(/\r?\n\s*\r?\n/);
 
-                // Process Table 1
-                if (tableSegments[0] && tableSegments[0].trim().length > 0) {
+                // Table 1 Logic
+                if (tableSegments[0]?.trim()) {
                     const res1 = Papa.parse(tableSegments[0].trim(), { header: true, skipEmptyLines: true });
-                    if (res1.data && res1.data.length > 0) {
+                    if (res1.data.length > 0) {
                         setTable1Data(res1.data);
                         setFilteredTable1(res1.data);
                         setColumns1(Object.keys(res1.data[0]));
                     }
                 }
 
-                // Process Table 2
-                if (tableSegments[1] && tableSegments[1].trim().length > 0) {
+                // Table 2 Logic
+                if (tableSegments[1]?.trim()) {
                     const res2 = Papa.parse(tableSegments[1].trim(), { header: true, skipEmptyLines: true });
-                    if (res2.data && res2.data.length > 0) {
+                    if (res2.data.length > 0) {
                         setTable2Data(res2.data);
                         setColumns2(Object.keys(res2.data[0]));
                     }
@@ -65,13 +82,14 @@ const SpecPage = () => {
             })
             .catch(err => {
                 if (err.name !== 'AbortError') {
-                    setError(err.message);
+                    console.error("Fetch Error:", err);
+                    setError(`Failed to load file: ${err.message}`);
                     setLoading(false);
                 }
             });
 
         return () => controller.abort();
-    }, [filepath, info.filename]);
+    }, [info?.filename]); // Only re-run if the filename specifically changes
 
     // Update filter logic to target Table 1 (assuming filter is for primary data)
     const handleFilterApply = (filters) => {
@@ -84,6 +102,9 @@ const SpecPage = () => {
         setFilteredTable1(filtered);
     };
 
+    // Construct filepath for FAB component
+    const filepath = info?.filename ? `/Assets/Data/${info.filename}` : '';
+
     return (
         <div className="min-h-screen bg-gray-100">
             <Navbar/>
@@ -93,7 +114,7 @@ const SpecPage = () => {
 
             <div className="p-8">
                 <h1 className="font-sans font-bold text-2xl text-blue-950 text-center mb-6">
-                    {info.label}
+                    {info?.label || 'Product Specifications'}
                 </h1>
 
                 {/* Only show FilterCard if we actually have columns to filter by */}
@@ -118,9 +139,16 @@ const SpecPage = () => {
                 )}
 
                 {loading && <p className="text-center">Loading dataset...</p>}
-                {error && <p className="text-red-500 text-center">{error}</p>}
+                {error && (
+                    <div className="text-center">
+                        <p className="text-red-500 mb-2">{error}</p>
+                        <p className="text-sm text-gray-600">
+                            Expected file location: {filepath}
+                        </p>
+                    </div>
+                )}
             </div>
-            <FAB filepath={filepath} fileName={info.label}/>
+            {info?.label && <FAB filepath={filepath} fileName={info.label}/>}
         </div>
     );
 };

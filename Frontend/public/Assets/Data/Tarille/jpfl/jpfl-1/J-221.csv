@@ -1,0 +1,22 @@
+Properties,,Test Method ,Unit,,,,,,
+Thickness,,ASTM D374,Micron,8,9,10,12,19,23
+,,ASTM D374,Gauge,32,36,40,48,76,92
+Yield,,JPFTM,m /kg,89.3,79.4,71.4,59.5,37.6,31
+,,JPFTM,in /lb,62700,55700,50200,41800,26400,21800
+Haze (Max),,ASTM D1003,%,3,3,3.5,3.5,3.5,4
+Total luminous transmittance,,ASTM D1003,%,89,89,89,89,89,89
+Tensile Strength,(MD) Min,ASTM D882,kg/cm,2000,2000,2000,2000,2000,2000
+,(MD) Min,ASTM D882,psi,28500,28500,28500,28500,28500,28500
+,(TD) Min,ASTM D882,kg/cm,1900,1900,1900,1900,1900,1900
+,(TD) Min,ASTM D882,psi,27000,27000,27000,27000,27000,27000
+Elongation,(MD) Min,ASTM D882,%,90,90,90,90,90,90
+,(TD) Min,ASTM D882,%,90,90,90,90,90,90
+Coefficient of friction(Side-A/B),St (Max),ASTM D1894,-,0.55,0.55,0.5,0.5,0.45,0.45
+,Dy (Max),ASTM D1894,-,0.5,0.5,0.45,0.45,0.4,0.4
+Shrinkage (150°C/30 min),(MD) Max,ASTM D1204,%,2.8,2.8,2.8,2.8,2.8,2.8
+,(TD) Max,ASTM D1204,%,0.8,0.8,0.4,0.4,0.4,0.4
+Wetting Tension (Coated Side),,ASTM D2578,Dyne/cm,56,56,56,56,56,56
+Water Vapour Transmission Rate,,ASTM E398,g/m / day,80,80,55,45,35,28
+,,ASTM E398,g/100 inch /day,5.2,5.2,3.6,3,2.3,1.8
+Oxygen Gas Transmission Rate (23°C,,ASTM D3985,cc/m /day,180,180,130,110,80,70
+,,ASTM D3985,cc/100 inch /day,11.8,11.8,8.5,7,5.2,4.5
