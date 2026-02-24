@@ -18,16 +18,16 @@ const ProductPage = () => {
                     {
                         id: "jkp-1", label: "Unit: JKPM (Rayagada)",
                         products: [
-                            { id: 11101, label: "JK Bond", filename: "jk_bond", range: "BharatPaper", desc: "Watermarked paper for legal applications with security features." },
-                            { id: 11102, label: "JK Elektra", filename: "jk_elektra", range: "BharatPaper", desc: "High bright and High Bulk Maplitho for Publications, Calendars, Brochures and Notebooks."},
-                            { id: 11103, label: "JK Evervite", filename: "jk_evervite", range: "BharatPaper", desc: "Brilliant bright white, smooth finish Maplitho for premium quality printing required for high end applications." },
-                            { id: 11104, label: "JK Finesse", filename: "jk_finesse", range: "BharatPaper", desc: "Low tinted, high end Maplitho suitable for multicolor printing used for Publications, Diaries and Notepads." },
-                            { id: 11105, label: "JK HSMT", filename: "jk_hsmt", range: "BharatPaper", desc: "High strength paper for wax match tissue and various other applications." },
-                            { id: 11106, label: "JK Lumina", filename: "jk_lumina", range: "BharatPaper", desc: "High Bright, premium quality Maplitho for Diaries, Notepads, High-End Printing." },
-                            { id: 11107, label: "JK Pulp Board", filename: "jk_pulpboard", range: "BharatPaper", desc: "High Bulk ad high GSM used for book covers and card applications." },
-                            { id: 11108, label: "JK TuffCote", filename: "jk_tuffcote", range: "BharatPaper", desc: "High-quality coated paper suitable for various printing needs." },
-                            { id: 11109, label: "JK SHB", filename: "jk_shb", range: "BharatPaper", desc: "High bright and High Bulk Maplitho for Publications, Calendars, Brochures and Notebooks." },
-                            { id: 11110, label: "JK SHB NS", filename: "jk_shb_ns", range: "BharatPaper", desc: "Natural Shade Maplitho with optimum properties suitable for variable applications." },
+                        //     { id: 11101, label: "JK Bond", filename: "jk_bond", range: "BharatPaper", desc: "Watermarked paper for legal applications with security features." },
+                        //     { id: 11102, label: "JK Elektra", filename: "jk_elektra", range: "BharatPaper", desc: "High bright and High Bulk Maplitho for Publications, Calendars, Brochures and Notebooks."},
+                        //     { id: 11103, label: "JK Evervite", filename: "jk_evervite", range: "BharatPaper", desc: "Brilliant bright white, smooth finish Maplitho for premium quality printing required for high end applications." },
+                        //     { id: 11104, label: "JK Finesse", filename: "jk_finesse", range: "BharatPaper", desc: "Low tinted, high end Maplitho suitable for multicolor printing used for Publications, Diaries and Notepads." },
+                        //     { id: 11105, label: "JK HSMT", filename: "jk_hsmt", range: "BharatPaper", desc: "High strength paper for wax match tissue and various other applications." },
+                        //     { id: 11106, label: "JK Lumina", filename: "jk_lumina", range: "BharatPaper", desc: "High Bright, premium quality Maplitho for Diaries, Notepads, High-End Printing." },
+                        //     { id: 11107, label: "JK Pulp Board", filename: "jk_pulpboard", range: "BharatPaper", desc: "High Bulk ad high GSM used for book covers and card applications." },
+                        //     { id: 11108, label: "JK TuffCote", filename: "jk_tuffcote", range: "BharatPaper", desc: "High-quality coated paper suitable for various printing needs." },
+                        //     { id: 11109, label: "JK SHB", filename: "jk_shb", range: "BharatPaper", desc: "High bright and High Bulk Maplitho for Publications, Calendars, Brochures and Notebooks." },
+                        //     { id: 11110, label: "JK SHB NS", filename: "jk_shb_ns", range: "BharatPaper", desc: "Natural Shade Maplitho with optimum properties suitable for variable applications." },
                         ]
                     },
                     {
@@ -69,17 +69,17 @@ const ProductPage = () => {
                     {
                         id: "jkp-3", label: "Unit: SPM (Sirpur)",
                         products: [
-                            { id: 11301, label: "SPM SW HB+", filename: "jk_spmswhb", range: "BharatPaper", desc: "High bright and High Bulk Maplitho for Publication, Calendars." },
-                            { id: 11302, label: "Sirpur Natura SS", filename: "jk_sirpurnaturass", range: "BharatPaper", desc: "Natural shade Maplitho with optimum properties suitable for variable applications." },
-                            { id: 11303, label: "SML Pink/Blue/Green", filename: "jk_sml", range: "BharatPaper", desc: "Pink, Blue, Yellow, Green colour Maplitho for children projects, Bill book." },
-                            { id: 11304, label: "Sirpur Ledger", filename: "jk_sirpurledger", range: "BharatPaper", desc: "Laidmarked ledger paper for legal/ledger books available in cut pack/folio." },
-                            { id: 11305, label: "Easy Draw SPM", filename: "jk_easydrawspm", range: "BharatPaper", desc: "High bulk paper for Drawing Books, Children Books with rub resistance." },
-                            { id: 11306, label: "SPM Lam-Base", filename: "jk_spmlambase", range: "BharatPaper", desc: "Virgin unbleached Absorbent Kraft paper for laminates." },
-                            { id: 11307, label: "SPM Purefil Cup Stock", filename: "jk_spmpurefilcs", range: "BharatPaper", desc: "Multi-Layer cup stock paper for paper cup." },
                             { id: 11308, label: "SPM Purefil Cup Stock Bottom", filename: "jk_spmpurefilcsb", range: "BharatPaper", desc: "ulti layer cup stock paper/board for cup bottom." },
-                            { id: 11309, label: "SPM Carry", filename: "jk_spmcarry", range: "BharatPaper", desc: "High Strength white paper suitable for carrybag application." },
-                            { id: 11310, label: "SPM Pulp Board", filename: "jk_spmpulpboard", range: "BharatPaper", desc: "High Bulk and High GSM used for books covers and card applications." },
-                            { id: 11311, label: "SPM Graphic Card", filename: "jk_spmgraphiccard", range: "BharatPaper", desc: "High Stiffness, High GSM board used for Wedding cards and Formal Invitations." },
+                        //     { id: 11301, label: "SPM SW HB+", filename: "jk_spmswhb", range: "BharatPaper", desc: "High bright and High Bulk Maplitho for Publication, Calendars." },
+                        //     { id: 11302, label: "Sirpur Natura SS", filename: "jk_sirpurnaturass", range: "BharatPaper", desc: "Natural shade Maplitho with optimum properties suitable for variable applications." },
+                        //     { id: 11303, label: "SML Pink/Blue/Green", filename: "jk_sml", range: "BharatPaper", desc: "Pink, Blue, Yellow, Green colour Maplitho for children projects, Bill book." },
+                        //     { id: 11304, label: "Sirpur Ledger", filename: "jk_sirpurledger", range: "BharatPaper", desc: "Laidmarked ledger paper for legal/ledger books available in cut pack/folio." },
+                        //     { id: 11305, label: "Easy Draw SPM", filename: "jk_easydrawspm", range: "BharatPaper", desc: "High bulk paper for Drawing Books, Children Books with rub resistance." },
+                        //     { id: 11306, label: "SPM Lam-Base", filename: "jk_spmlambase", range: "BharatPaper", desc: "Virgin unbleached Absorbent Kraft paper for laminates." },
+                        //     { id: 11307, label: "SPM Purefil Cup Stock", filename: "jk_spmpurefilcs", range: "BharatPaper", desc: "Multi-Layer cup stock paper for paper cup." },
+                        //     { id: 11309, label: "SPM Carry", filename: "jk_spmcarry", range: "BharatPaper", desc: "High Strength white paper suitable for carrybag application." },
+                        //     { id: 11310, label: "SPM Pulp Board", filename: "jk_spmpulpboard", range: "BharatPaper", desc: "High Bulk and High GSM used for books covers and card applications." },
+                        //     { id: 11311, label: "SPM Graphic Card", filename: "jk_spmgraphiccard", range: "BharatPaper", desc: "High Stiffness, High GSM board used for Wedding cards and Formal Invitations." },
                         ]
                     }
                 ]
@@ -90,8 +90,7 @@ const ProductPage = () => {
                     {
                         id: "srf-1", label: "Unit: Madhya Pradesh",
                         products: [
-                            { id: 12101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
-                            { id: 12102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                            // { id: 12101, label: "Soft Aluminium Foil", filename: "srf-soft", range: "BharatPaper", desc:""},
                         ]
                     }
                 ]
@@ -102,8 +101,8 @@ const ProductPage = () => {
                     {
                         id: "srfaltech-1", label: "Unit: Madhya Pradesh",
                         products: [
-                            { id: 13101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
-                            { id: 13102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        //     { id: 13101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                        //     { id: 13102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
                         ]
                     }
                 ]
@@ -132,8 +131,8 @@ const ProductPage = () => {
                     {
                         id: "shyamsel-1", label: "Unit: Factory",
                         products: [
-                            { id: 22101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
-                            { id: 22102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        //     { id: 22101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                        //     { id: 22102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
                         ]
                     }
                 ]
@@ -146,8 +145,8 @@ const ProductPage = () => {
                     {
                         id: "jkp_conv-1", label: "Unit: CPM (Gujarat)",
                         products: [
-                            { id: 31101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
-                            { id: 31102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
+                        //     { id: 31101, label: "JK Copier", filename: "jk_copier", range: "BharatPaper" },
+                        //     { id: 31102, label: "JK Excel Bond", filename: "jk_excel", range: "BharatPaper" }
                         ]
                     }
                 ]
@@ -209,17 +208,6 @@ const ProductPage = () => {
         setSelectedFactory(factoryObj);
         sessionStorage.setItem("selectedFactory", JSON.stringify(factoryObj));
     };
-
-    // const handleProductClick = (product) => {
-    //     console.log(product);
-    //     // console.log(selectedBrand);
-    //     // console.log(selectedFactory);
-    //     const filename = selectedRange+'_'+selectedBrand.id+'_'+selectedFactory.id+'_'+product.filename+'.csv';
-    //     const prodDetails = {range: selectedRange, brand:selectedBrand.id, factory:selectedFactory.id, label:product.label, product: product.filename, filename: filename};
-    //
-    //     console.log(filename);
-    //     navigate('/spec', { state: { buttonInfo: prodDetails } });
-    // };
 
     const handleProductClick = (product, thickness = null) => {
         // If the product has thicknesses but none is selected yet,
@@ -301,7 +289,7 @@ const ProductPage = () => {
                                         <option value="" disabled>Pick a Company</option>
                                         <option value="BharatPaper">Bharat Paper Mart</option>
                                         <option value="Tarille">Tarille Corporation</option>
-                                        <option value="Converters">Bharat Converters</option>
+                                        <option value="Converters" disabled>Bharat Converters</option>
                                     </select>
                                 </fieldset>
 

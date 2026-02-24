@@ -46,7 +46,8 @@ const SpecPage = () => {
         console.log(`Full info object:`, info);
 
         // 3. Properly encode URI components - encode each segment separately
-        const encodedUrl = fullUrl.split('/').map(segment => encodeURIComponent(segment)).join('/');
+        const cleanPath = info.filename.split('/').map(s => encodeURIComponent(s)).join('/');
+        const encodedUrl = `/Assets/Data/${cleanPath}`;
 
         fetch(encodedUrl, { signal: controller.signal })
             .then(response => {
